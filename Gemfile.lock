@@ -1,0 +1,55 @@
+PATH
+  remote: .
+  specs:
+    exercism-local-tooling-webserver (0.1.0)
+      etc
+      json
+      puma
+      sinatra
+      sinatra-contrib
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    backports (3.18.1)
+    etc (1.1.0)
+    json (2.3.1)
+    minitest (5.14.1)
+    mocha (1.11.2)
+    multi_json (1.15.0)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.2)
+    puma (4.3.5)
+      nio4r (~> 2.0)
+    rack (2.2.3)
+    rack-protection (2.0.8.1)
+      rack
+    rake (12.3.3)
+    ruby2_keywords (0.0.2)
+    sinatra (2.0.8.1)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.8.1)
+      tilt (~> 2.0)
+    sinatra-contrib (2.0.8.1)
+      backports (>= 2.8.2)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.0.8.1)
+      sinatra (= 2.0.8.1)
+      tilt (~> 2.0)
+    tilt (2.0.10)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 2.1)
+  exercism-local-tooling-webserver!
+  minitest (~> 5.0)
+  mocha
+  rake (~> 12.3)
+
+BUNDLED WITH
+   2.1.4
