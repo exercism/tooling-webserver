@@ -27,7 +27,7 @@ post '/job' do
   logger.info `ls -lah #{input_dir}`
 
   # Run command
-  cmd = "/bin/sh bin/run.sh #{params[:exercise]} #{input_dir} #{output_dir}"
+  cmd = "./bin/run.sh #{params[:exercise]} #{input_dir} #{output_dir}"
   exit_status = Dir.chdir("/opt/test-runner/") do
     system(cmd)
   end
