@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    exercism-local-tooling-webserver (0.1.0)
+    exercism-local-tooling-webserver (0.2.0)
       etc
       json
       puma
@@ -13,7 +13,8 @@ GEM
   specs:
     backports (3.18.1)
     etc (1.1.0)
-    json (2.3.1)
+    gem-release (2.1.1)
+    json (2.3.0)
     minitest (5.14.1)
     mocha (1.11.2)
     multi_json (1.15.0)
@@ -47,6 +48,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.1)
   exercism-local-tooling-webserver!
+  gem-release
   minitest (~> 5.0)
   mocha
   rake (~> 12.3)
