@@ -1,9 +1,3 @@
-module Exercism
-  module Local
-    module Tooling
-      module Webserver
-        VERSION = "0.2.0"
-      end
-    end
-  end
+module ExercismLocalToolingWebserver
+  VERSION = "0.2.0"
 end

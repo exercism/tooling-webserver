@@ -2,7 +2,7 @@ require_relative 'lib/exercism_local_tooling_webserver/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "exercism-local-tooling-webserver"
-  spec.version       = Exercism::Local::Tooling::Webserver::VERSION
+  spec.version       = ExercismLocalToolingWebserver::VERSION
   spec.authors       = ["Erik Schierboom"]
   spec.email         = ["erik_schierboom@hotmail.com"]
 
