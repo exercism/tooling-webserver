@@ -15,13 +15,13 @@ post '/job' do
 
   # Create dirs
   job_dir = "/tmp/jobs/#{job_id}"
-  input_dir = "#{job_dir}/input"
-  output_dir = "#{job_dir}/output"
+  input_dir = "#{job_dir}/input/"
+  output_dir = "#{job_dir}/output/"
   FileUtils.mkdir_p(input_dir)
   FileUtils.mkdir_p(output_dir)
 
   # Setup input
-  zip_file = "#{job_dir}/files.gzip"
+  zip_file = "#{job_dir}/files.zip"
   File.write(zip_file, params[:zipped_files])
   `unzip #{zip_file} -d #{input_dir}`
   logger.info `ls -lah #{input_dir}`
