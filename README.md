@@ -1,10 +1,8 @@
-# Exercism::Local::Tooling::Webserver
+# Exercism Local Tooling Webserver
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/exercism/local/tooling/webserver`. To experiment with that code, run `bin/console` for an interactive prompt.
+This small webhook wrapper is used when test runners are running inside the Docker development environment.  Since they cannot be launched via runc in this environment we need an alternative.  Tooling Invoker instead dispatches a web request.  This tiny web server responds to those requests, wraps the underlying `./run.sh` test runner script, and returns the JSON output file as a simple JSON response.
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
+## Installation (Ruby)
 
 Add this line to your application's Gemfile:
 
@@ -20,9 +18,45 @@ Or install it yourself as:
 
     $ gem install exercism-local-tooling-webserver
 
-## Usage
+## Usage / Installation (Nim binary)
 
-TODO: Write usage instructions here
+The compiled stand-alone binary is intended to simply be added directly into your test runner's build:
+
+```dockerfile
+# inside your dockerfile
+ARG webhook_version=0.5.0
+RUN curl -L -o /usr/local/bin/exercism_local_tooling_webserver \
+  https://github.com/exercism/local-tooling-webserver/releases/download/${webhook_version}/exercism_local_tooling_webserver
+RUN chmod +x /usr/local/bin/exercism_local_tooling_webserver
+```
+
+And then the `entrypoint` is modified when running in development mode:
+
+```yaml
+javascript-test-runner:
+  entrypoint: exercism_local_tooling_webserver
+```
+
+## Testing with Curl
+
+An example:
+
+```bash
+curl 'http://localhost:4567/job' -H 'Expect:' \
+  -F zipped_files="<test.zip" \
+  -F exercise=two-fer \
+  -F results_filepath=results.json
+```
+
+The zip archive should include the exercise solution and tests.  For this to work you'll have to expose port 4567. If you're using `v3-docker-compose` you can simply modify your `stack.yml`:
+
+```yaml
+configure:
+  javascript-test-runner:
+    build: true
+    ports:
+      - 4567:4567
+```
 
 ## Development
 
