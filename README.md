@@ -43,9 +43,9 @@ An example:
 
 ```bash
 curl 'http://localhost:4567/job' -H 'Expect:' \
-  -F zipped_files="<test.zip" \
-  -F exercise=two-fer \
-  -F results_filepath=results.json
+  -d exercise=two-fer \
+  -d results_filepath=results.json \
+  --data-urlencode zipped_files@test.zip
 ```
 
 The zip archive should include the exercise solution and tests.  For this to work you'll have to expose port 4567. If you're using `v3-docker-compose` you can simply modify your `stack.yml`:
