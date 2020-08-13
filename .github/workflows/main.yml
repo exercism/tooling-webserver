@@ -34,4 +34,4 @@ jobs:
           tag: ${{ github.ref }}
           # tag: latest
           overwrite: true
-          body: "This is my release text"
+          # body: "This is my release text"

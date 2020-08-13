@@ -2,7 +2,7 @@
 
 version       = "0.5.0"
 author        = "Josh Goebel"
-description   = "A new awesome nimble package"
+description   = "Webhook for running Exercism test runners inside Docker in dev mode"
 license       = "MIT"
 srcDir        = "src"
 bin           = @["exercism_local_tooling_webserver"]
