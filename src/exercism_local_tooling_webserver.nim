@@ -25,7 +25,7 @@ router routes:
     os.createDir(output_dir)
 
     # # Setup input
-    let zip_file = fmt"{job_dir}/files.gzip"
+    let zip_file = fmt"{job_dir}/files.zip"
     let zip_data = request.formData.getOrDefault("zipped_files").body
     writeFile(zip_file, zip_data)
     discard execShellCmd fmt"unzip {zip_file} -d {input_dir}"
