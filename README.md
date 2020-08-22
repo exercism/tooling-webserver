@@ -1,6 +1,6 @@
 # Exercism Local Tooling Webserver
 
-This small webhook wrapper is used when test runners are running inside the Docker development environment.  Since they cannot be launched via runc in this environment we need an alternative.  Tooling Invoker instead dispatches a web request.  This tiny web server responds to those requests, wraps the underlying `./run.sh` test runner script, and returns the JSON output file as a simple JSON response.
+This small webhook wrapper is used when tooling (analyzers/representers/test runners) runs inside the Docker development environment. Since they cannot be launched via `runc` in this environment we need an alternative. The [Tooling Invoker](https://github.com/exercism/tooling-invoker/) instead dispatches a web request. This tiny web server responds to those requests, wraps the underlying `./run.sh` test runner script, and returns the JSON output file as a simple JSON response.
 
 ## Installation (Ruby)
 
@@ -20,14 +20,21 @@ Or install it yourself as:
 
 ## Usage / Installation (Nim binary)
 
-The compiled stand-alone binary is intended to simply be added directly into your test runner's build:
+The compiled stand-alone binary is intended to simply be added directly into your tooling's Docker image. Here are some Dockerfile commands to use `curl` or `wget` to include the binary into your Docker image:
 
 ```dockerfile
-# inside your dockerfile
-ARG webhook_version=0.5.0
+# inside your Dockerfile
 RUN curl -L -o /usr/local/bin/exercism_local_tooling_webserver \
-  https://github.com/exercism/local-tooling-webserver/releases/download/${webhook_version}/exercism_local_tooling_webserver
-RUN chmod +x /usr/local/bin/exercism_local_tooling_webserver
+      https://github.com/exercism/local-tooling-webserver/releases/download/latest/exercism_local_tooling_webserver && \
+    chmod +x /usr/local/bin/exercism_local_tooling_webserver
+```
+
+or
+
+```dockerfile
+# inside your Dockerfile
+RUN wget -P /usr/local/bin https://github.com/exercism/local-tooling-webserver/releases/latest/download/exercism_local_tooling_webserver && \
+    chmod +x /usr/local/bin/exercism_local_tooling_webserver
 ```
 
 And then the `entrypoint` is modified when running in development mode:
