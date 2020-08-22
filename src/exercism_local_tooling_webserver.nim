@@ -34,7 +34,7 @@ router routes:
     # Run command
     let exercise_name = request.params["exercise"]
     let cmd = fmt"./bin/run.sh {exercise_name} {input_dir} {output_dir}"
-    setCurrentDir("/opt/test-runner")
+    setCurrentDir(request.params["working_directory"])
     let exit_status = execShellCmd(cmd)
 
     let response = %*
