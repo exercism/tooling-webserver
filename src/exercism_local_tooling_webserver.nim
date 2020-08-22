@@ -17,14 +17,14 @@ router routes:
       # Uniq ID for this job
     let job_id = $(genUUID())
 
-    # # Create dirs
+    # Create dirs
     let job_dir = fmt"/tmp/jobs/{job_id}"
     let input_dir = fmt"{job_dir}/input/"
     let output_dir = fmt"{job_dir}/output/"
     os.createDir(input_dir)
     os.createDir(output_dir)
 
-    # # Setup input
+    # Setup input
     let zip_file = fmt"{job_dir}/files.zip"
     let zip_data = request.params["zipped_files"]
     writeFile(zip_file, zip_data)
