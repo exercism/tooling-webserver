@@ -2,25 +2,9 @@
 
 This small webhook wrapper is used when tooling (analyzers/representers/test runners) runs inside the Docker development environment. Since they cannot be launched via `runc` in this environment we need an alternative. The [Tooling Invoker](https://github.com/exercism/tooling-invoker/) instead dispatches a web request. This tiny web server responds to those requests, wraps the underlying `./run.sh` test runner script, and returns the JSON output file as a simple JSON response.
 
-## Installation (Ruby)
+## Installation (Docker)
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'exercism-local-tooling-webserver'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install exercism-local-tooling-webserver
-
-## Usage / Installation (Nim binary)
-
-The compiled stand-alone binary is intended to simply be added directly into your tooling's Docker image. Here are some Dockerfile commands to use `curl` or `wget` to include the binary into your Docker image:
+The compiled stand-alone binary should be added directly into your tooling's Docker image. Here are some Dockerfile commands to use `curl` or `wget` to include the binary into your Docker image:
 
 ```dockerfile
 # inside your Dockerfile
@@ -37,12 +21,30 @@ RUN wget -P /usr/local/bin https://github.com/exercism/local-tooling-webserver/r
     chmod +x /usr/local/bin/exercism_local_tooling_webserver
 ```
 
-And then the `entrypoint` is modified when running in development mode:
+See [this Dockerfile](https://github.com/exercism/javascript-test-runner/blob/master/Dockerfile#L33) for an example on how to include the tooling into a Docker image.
+
+The above allows the [development environment](https://github.com/exercism/development-environment/) to run the tooling as a Docker container but with a modified entrypoint:
 
 ```yaml
 javascript-test-runner:
   entrypoint: exercism_local_tooling_webserver
 ```
+
+## Installation (Ruby)
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'exercism-local-tooling-webserver'
+```
+
+And then execute:
+
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install exercism-local-tooling-webserver
 
 ## Testing with Curl
 
