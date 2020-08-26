@@ -1,0 +1,7 @@
+#!/bin/bash
+
+NAME="local-tooling-webserver"
+
+docker container create --name $NAME exercism/local-tooling-webserver
+docker container cp $NAME:/opt/local-tooling-webserver/exercism_local_tooling_webserver ./
+docker container rm $NAME

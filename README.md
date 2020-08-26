@@ -57,7 +57,7 @@ curl 'http://localhost:4567/job' -H 'Expect:' \
   --data-urlencode zipped_files@test.zip
 ```
 
-The zip archive should include the exercise solution and tests.  For this to work you'll have to expose port 4567. If you're using `v3-docker-compose` you can simply modify your `stack.yml`:
+The zip archive should include the exercise solution and tests. For this to work you'll have to expose port 4567. If you're using `v3-docker-compose` you can simply modify your `stack.yml`:
 
 ```yaml
 configure:
@@ -73,7 +73,16 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+## Building using Docker
+
+If you'd prefer not to install Nim but would still like to be able to build the binary, you can do so if you have Docker installed. To build the binary, run:
+
+```bash
+./bin/build
+```
+
+This will build the binary inside a Docker container and copy the built binary to the current directory.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/exercism-local-tooling-webserver.
-
