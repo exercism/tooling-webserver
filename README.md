@@ -30,22 +30,6 @@ javascript-test-runner:
   entrypoint: exercism_local_tooling_webserver
 ```
 
-## Installation (Ruby)
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'exercism-local-tooling-webserver'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install exercism-local-tooling-webserver
-
 ## Testing with Curl
 
 An example:
@@ -57,7 +41,7 @@ curl 'http://localhost:4567/job' -H 'Expect:' \
   --data-urlencode zipped_files@test.zip
 ```
 
-The zip archive should include the exercise solution and tests.  For this to work you'll have to expose port 4567. If you're using `v3-docker-compose` you can simply modify your `stack.yml`:
+The zip archive should include the exercise solution and tests. For this to work you'll have to expose port 4567. If you're using the [development-environment](https://github.com/exercism/development-environment/), you can simply modify your `stack.yml`:
 
 ```yaml
 configure:
