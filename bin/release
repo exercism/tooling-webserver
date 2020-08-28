@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 
 nimble install -d -Y bump
+
+which bump
+
 bump --minor
