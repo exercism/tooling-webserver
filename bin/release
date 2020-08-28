@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+nimble install -d -Y bump
+bump --major
