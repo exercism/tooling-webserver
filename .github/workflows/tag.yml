@@ -12,15 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Git credentials
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
       - name: Install Nim
         uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: '1.2.6'
-
-      - name: Add Nimble binaries to path
-        run: |
-          printenv
-          echo "::add-path::~/.nimble/bin"
       
       - name: Bump version and push tag
         run: ./bin/release

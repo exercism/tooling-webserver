@@ -1,11 +1,4 @@
 #!/usr/bin/env sh
 
 nimble install -Y bump
-
-ls -al ~/
-ls -al ~/.nimble
-ls -al ~/.nimble/bin
-
-which bump
-
 bump --minor
