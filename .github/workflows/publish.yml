@@ -20,14 +20,14 @@ jobs:
         with:
           nim-version: '1.2.6'
       
-      # - name: Install Nim build tools
-      #   run: ./.github/bin/install-build-tools
+      - name: Install Nim build tools
+        run: ./.github/bin/install-build-tools
       
       # - name: Bump version and push tag
       #   run: ./bin/release
 
-      # - name: Build binary
-      #   run: ./bin/build
+      - name: Build binary
+        run: ./bin/build
 
       - name: Set current tag
         run: ./.github/bin/export-version
