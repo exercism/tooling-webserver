@@ -33,7 +33,7 @@ jobs:
         run: ./.github/bin/export-version
 
       - name: Test
-        run: echo "${{ TAG }}"
+        run: printenv
 
       # - name: Upload binary to release
       #   uses: svenstaro/upload-release-action@v2
