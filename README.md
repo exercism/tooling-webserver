@@ -8,17 +8,17 @@ The compiled stand-alone binary should be added directly into your tooling's Doc
 
 ```dockerfile
 # inside your Dockerfile
-RUN curl -L -o /usr/local/bin/exercism_local_tooling_webserver \
-      https://github.com/exercism/local-tooling-webserver/releases/download/latest/exercism_local_tooling_webserver && \
-    chmod +x /usr/local/bin/exercism_local_tooling_webserver
+RUN curl -L -o /usr/local/bin/tooling_webserver \
+      https://github.com/exercism/tooling-webserver/releases/download/latest/tooling_webserver && \
+    chmod +x /usr/local/bin/tooling_webserver
 ```
 
 or
 
 ```dockerfile
 # inside your Dockerfile
-RUN wget -P /usr/local/bin https://github.com/exercism/local-tooling-webserver/releases/latest/download/exercism_local_tooling_webserver && \
-    chmod +x /usr/local/bin/exercism_local_tooling_webserver
+RUN wget -P /usr/local/bin https://github.com/exercism/tooling-webserver/releases/latest/download/tooling_webserver && \
+    chmod +x /usr/local/bin/tooling_webserver
 ```
 
 See [this Dockerfile](https://github.com/exercism/javascript-test-runner/blob/master/Dockerfile#L33) for an example on how to include the tooling into a Docker image.
@@ -27,7 +27,7 @@ The above allows the [development environment](https://github.com/exercism/devel
 
 ```yaml
 javascript-test-runner:
-  entrypoint: exercism_local_tooling_webserver
+  entrypoint: tooling_webserver
 ```
 
 ## Testing with Curl
@@ -53,5 +53,5 @@ configure:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/exercism/local-tooling-webserver.
+Bug reports and pull requests are welcome on GitHub at https://github.com/exercism/tooling-webserver.
 

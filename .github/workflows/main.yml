@@ -29,8 +29,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: exercism_local_tooling_webserver
-          asset_name: exercism_local_tooling_webserver
+          file: tooling_webserver
+          asset_name: tooling_webserver
           tag: ${{ github.ref }}
           # tag: latest
           overwrite: true
