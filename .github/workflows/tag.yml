@@ -18,7 +18,9 @@ jobs:
           nim-version: '1.2.6'
 
       - name: Add Nimble binaries to path
-        run: echo "::add-path::~/.nimble/bin"
+        run: |
+          printenv
+          echo "::add-path::~/.nimble/bin"
       
       - name: Bump version and push tag
         run: ./bin/release
