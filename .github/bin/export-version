@@ -2,4 +2,4 @@
 
 VERSION=$(nimble dump | grep "version:" | cut -d':' -f 2 | tr -d '"')
 echo "version: $VERSION"
-# echo "::set-env name=TAG::$TAG"
+echo "::set-env name=version::$VERSION"
