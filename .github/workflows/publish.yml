@@ -1,8 +1,8 @@
 name: Publish a release
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 
 jobs:
   build:
@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Git credentials
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
       - name: Install Nim
         uses: jiro4989/setup-nim-action@v1
         with:
@@ -20,8 +25,16 @@ jobs:
       - name: Install Nim build dependencies
         run: sudo apt-get install musl-dev musl-tools
       
+      - name: Bump version and push tag
+        run: ./bin/release
+
       - name: Build binary
         run: ./bin/build
+
+      - name: Set current tag
+        run:
+          TAG=$(nimble dump | grep "version:" | sed 's/version: //' | sed 's/"//g')
+          echo "::set-env name=TAG::$TAG"
 
       - name: Upload binary to release
         uses: svenstaro/upload-release-action@v2
@@ -29,5 +42,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: tooling_webserver
           asset_name: tooling_webserver
-          tag: ${{ github.ref }}
+          tag: $TAG
           overwrite: true
