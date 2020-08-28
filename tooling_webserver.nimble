@@ -2,10 +2,10 @@
 
 version       = "0.7.0"
 author        = "Josh Goebel"
-description   = "Webhook for running Exercism test runners inside Docker in dev mode"
+description   = "Webhook for running Exercism tooling inside Docker in dev mode"
 license       = "AGPL3"
 srcDir        = "src"
-bin           = @["exercism_local_tooling_webserver"]
+bin           = @["tooling_webserver"]
 
 backend       = "c"
 
