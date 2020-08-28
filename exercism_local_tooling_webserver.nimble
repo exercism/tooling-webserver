@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.5.0"
+version       = "0.6.0"
 author        = "Josh Goebel"
 description   = "Webhook for running Exercism test runners inside Docker in dev mode"
 license       = "AGPL3"
