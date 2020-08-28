@@ -33,7 +33,8 @@ jobs:
 
       - name: Set current tag
         run:
-          TAG=$(nimble dump | grep "version:" | sed 's/version: //' | sed 's/"//g')
+          TAG=$(nimble dump | grep "version:" | cut -d':' -f 2 | tr -d '"')
+          echo $TAG
           echo "::set-env name=TAG::$TAG"
 
       - name: Upload binary to release
