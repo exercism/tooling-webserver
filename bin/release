@@ -4,4 +4,4 @@ nimble install -d -Y bump
 
 which bump
 
-bump --minor
+# bump --minor
