@@ -2,6 +2,10 @@
 
 nimble install -d -Y bump
 
+ls -al ~/
+ls -al ~/.nimble
+ls -al ~/.nimble/bin
+
 which bump
 
 # bump --minor
