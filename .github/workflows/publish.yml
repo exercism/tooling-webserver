@@ -1,0 +1,33 @@
+name: Publish a release
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Publish a release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Nim
+        uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: '1.2.6'
+      
+      - name: Install Nim build dependencies
+        run: sudo apt-get install musl-dev musl-tools
+      
+      - name: Build binary
+        run: ./bin/build
+
+      - name: Upload binary to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: tooling_webserver
+          asset_name: tooling_webserver
+          tag: ${{ github.ref }}
+          overwrite: true
