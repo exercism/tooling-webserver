@@ -20,8 +20,8 @@ jobs:
         with:
           nim-version: '1.2.6'
       
-      - name: Install Nim build dependencies
-        run: sudo apt-get install musl-dev musl-tools
+      - name: Install Nim build tools
+        run: ./.github/bin/install-build-tools
       
       - name: Bump version and push tag
         run: ./bin/release
@@ -33,7 +33,7 @@ jobs:
         run: ./.github/bin/export-version
 
       - name: Test
-        run: echo ${{ TAG }}
+        run: echo "${{ TAG }}"
 
       # - name: Upload binary to release
       #   uses: svenstaro/upload-release-action@v2
