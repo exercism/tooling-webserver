@@ -2,6 +2,7 @@ import jester
 import os
 import osproc
 import strformat
+import strutils
 import json
 import uuids
 import system/ansi_c
@@ -40,12 +41,12 @@ router routes:
     let response = %*
         {
             "exit_status": exit_status,
-            "result": nil
+            "output_files": %*{}
         }
 
-    let results_filepath = request.params["results_filepath"]
-    if fileExists(fmt"{output_dir}/{results_filepath}"):
-        response["result"] = % readFile(fmt"{output_dir}/{results_filepath}")
+    for output_filepath in request.params["output_filepaths"].split(','):
+      if fileExists(fmt"{output_dir}/{output_filepath}"):
+        response["output_files"][output_filepath] = % readFile(fmt"{output_dir}/{output_filepath}")
 
     resp response
 
