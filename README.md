@@ -21,6 +21,13 @@ RUN wget -P /usr/local/bin https://github.com/exercism/tooling-webserver/release
     chmod +x /usr/local/bin/tooling_webserver
 ```
 
+As an alternative, you could also include a specific version of the tooling webserver in your Dockerfile. The main advantage of this is that updating the version will trigger a rebuild of the Docker image, where this might not be the case with the latest version (depending on how you've setup your Dockerfile).
+
+```dockerfile
+RUN wget -P /usr/local/bin https://github.com/exercism/tooling-webserver/releases/download/0.10.0/tooling_webserver && \
+    chmod +x /usr/local/bin/tooling_webserver
+```
+
 See [this Dockerfile](https://github.com/exercism/javascript-test-runner/blob/master/Dockerfile#L33) for an example on how to include the tooling into a Docker image.
 
 The above allows the [development environment](https://github.com/exercism/development-environment/) to run the tooling as a Docker container but with a modified entrypoint:
