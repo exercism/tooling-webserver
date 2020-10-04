@@ -1,5 +1,4 @@
-import system/ansi_c
-import std/[json, os, osproc, strformat, strutils]
+import std/[json, os, osproc, posix, strformat, strutils]
 import pkg/[jester, uuids]
 
 const NimblePkgVersion {.strdefine.}: string = "unknown"
@@ -44,11 +43,9 @@ router routes:
 
     resp response
 
-proc sigTermHandler(sign: cint) {.noconv.} =
-  quit 0
-
 proc main() =
-  c_signal(SIGTERM, sigTermHandler)
+  onSignal(SIGTERM):
+    quit(0)
 
   let port = Port(4567)
   let settings = newSettings(port = port)
