@@ -39,10 +39,10 @@ router routes:
     let exit_status = execShellCmd(cmd)
 
     let response = %*
-        {
-            "exit_status": exit_status,
-            "output_files": %*{}
-        }
+      {
+        "exit_status": exit_status,
+        "output_files": %*{}
+      }
 
     for output_filepath in request.params["output_filepaths"].split(','):
       if fileExists(fmt"{output_dir}/{output_filepath}"):
