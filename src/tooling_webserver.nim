@@ -1,11 +1,6 @@
-import jester
-import os
-import osproc
-import strformat
-import strutils
-import json
-import uuids
 import system/ansi_c
+import std/[json, os, osproc, strformat, strutils]
+import pkg/[jester, uuids]
 
 type SignalHandler = proc (sign: cint) {.noconv.}
 
