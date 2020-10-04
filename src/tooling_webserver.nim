@@ -9,13 +9,13 @@ import system/ansi_c
 
 type SignalHandler = proc (sign: cint) {.noconv.}
 
-const NimblePkgVersion {.strdefine}: string = "unknown"
+const NimblePkgVersion {.strdefine.}: string = "unknown"
 
 echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
 
 router routes:
   post "/job":
-      # Uniq ID for this job
+    # Uniq ID for this job
     let job_id = $(genUUID())
 
     # Create dirs
@@ -57,8 +57,8 @@ proc main() =
   c_signal(SIGTERM, cast[SignalHandler](sigTermHandler))
 
   let port = Port(4567)
-  let settings = newSettings(port=port)
-  var jester = initJester(routes, settings=settings)
+  let settings = newSettings(port = port)
+  var jester = initJester(routes, settings = settings)
   jester.serve()
 
 main()
