@@ -10,7 +10,7 @@ echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
 
 router routes:
   post "/job":
-    # Uniq ID for this job
+    # Create unique ID for this job
     let jobId = $(genUUID())
 
     # Create dirs
@@ -33,6 +33,7 @@ router routes:
     setCurrentDir(request.params["working_directory"])
     let exitStatus = execShellCmd(cmd)
 
+    # Construct response
     let response = %*
       {
         "exit_status": exitStatus,
