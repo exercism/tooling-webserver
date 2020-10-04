@@ -22,8 +22,8 @@ router routes:
     let job_dir = fmt"/tmp/jobs/{job_id}"
     let input_dir = fmt"{job_dir}/input/"
     let output_dir = fmt"{job_dir}/output/"
-    os.createDir(input_dir)
-    os.createDir(output_dir)
+    createDir(input_dir)
+    createDir(output_dir)
 
     # Setup input
     let zip_file = fmt"{job_dir}/files.zip"
