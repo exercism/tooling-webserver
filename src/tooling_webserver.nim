@@ -16,37 +16,37 @@ echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
 router routes:
   post "/job":
     # Uniq ID for this job
-    let job_id = $(genUUID())
+    let jobId = $(genUUID())
 
     # Create dirs
-    let job_dir = fmt"/tmp/jobs/{job_id}"
-    let input_dir = fmt"{job_dir}/input/"
-    let output_dir = fmt"{job_dir}/output/"
-    createDir(input_dir)
-    createDir(output_dir)
+    let jobDir = fmt"/tmp/jobs/{jobId}"
+    let inputDir = fmt"{jobDir}/input/"
+    let outputDir = fmt"{jobDir}/output/"
+    createDir(inputDir)
+    createDir(outputDir)
 
     # Setup input
-    let zip_file = fmt"{job_dir}/files.zip"
-    let zip_data = request.params["zipped_files"]
-    writeFile(zip_file, zip_data)
-    discard execShellCmd fmt"unzip {zip_file} -d {input_dir}"
-    echo execProcess(fmt"ls -lah {input_dir}")
+    let zipFile = fmt"{jobDir}/files.zip"
+    let zipData = request.params["zipped_files"]
+    writeFile(zipFile, zipData)
+    discard execShellCmd fmt"unzip {zipFile} -d {inputDir}"
+    echo execProcess(fmt"ls -lah {inputDir}")
 
     # Run command
-    let exercise_name = request.params["exercise"]
-    let cmd = fmt"./bin/run.sh {exercise_name} {input_dir} {output_dir}"
+    let exerciseName = request.params["exercise"]
+    let cmd = fmt"./bin/run.sh {exerciseName} {inputDir} {outputDir}"
     setCurrentDir(request.params["working_directory"])
-    let exit_status = execShellCmd(cmd)
+    let exitStatus = execShellCmd(cmd)
 
     let response = %*
       {
-        "exit_status": exit_status,
+        "exit_status": exitStatus,
         "output_files": %*{}
       }
 
-    for output_filepath in request.params["output_filepaths"].split(','):
-      if fileExists(fmt"{output_dir}/{output_filepath}"):
-        response["output_files"][output_filepath] = % readFile(fmt"{output_dir}/{output_filepath}")
+    for outputFilepath in request.params["output_filepaths"].split(','):
+      if fileExists(fmt"{outputDir}/{outputFilepath}"):
+        response["output_files"][outputFilepath] = % readFile(fmt"{outputDir}/{outputFilepath}")
 
     resp response
 
