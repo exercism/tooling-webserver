@@ -2,8 +2,6 @@ import system/ansi_c
 import std/[json, os, osproc, strformat, strutils]
 import pkg/[jester, uuids]
 
-type SignalHandler = proc (sign: cint) {.noconv.}
-
 const NimblePkgVersion {.strdefine.}: string = "unknown"
 
 echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
@@ -46,11 +44,11 @@ router routes:
 
     resp response
 
-proc sigTermHandler(sign: cint) =
+proc sigTermHandler(sign: cint) {.noconv.} =
   quit 0
 
 proc main() =
-  c_signal(SIGTERM, cast[SignalHandler](sigTermHandler))
+  c_signal(SIGTERM, sigTermHandler)
 
   let port = Port(4567)
   let settings = newSettings(port = port)
