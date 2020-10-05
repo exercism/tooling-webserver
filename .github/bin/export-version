@@ -2,4 +2,4 @@
 
 # Extract the version from the tooling_webserver.nimble file
 VERSION=$(nimble dump | grep "version:" | cut -d':' -f 2 | tr -d ' "')
-echo "::set-env name=VERSION::$VERSION"
+echo "VERSION=${VERSION}" >> "${GITHUB_ENV}"
