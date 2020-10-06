@@ -27,7 +27,7 @@ jobs:
 
       - name: Check if there was a code change
         run: |
-          if git diff --name-only "$(git merge-base origin/master HEAD)" | grep '^src/.*.nim$'; then
+          if git diff --name-only ${{ github.event.before }} "${GITHUB_SHA}" | grep '^src/.*.nim$'; then
             echo 'NIMFILECHANGED=true' >> "${GITHUB_ENV}"
           fi
 
