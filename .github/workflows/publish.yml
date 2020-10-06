@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Setup Git credentials
         run: ./.github/bin/set-credentials
@@ -23,16 +25,25 @@ jobs:
       - name: Install Nim build tools
         run: ./.github/bin/install-build-tools
 
+      - name: Check if there was a code change
+        run: |
+          if git diff --name-only "$(git merge-base origin/master HEAD)" | grep '^src/.*.nim$'; then
+            echo 'NIMFILECHANGED=true' >> "${GITHUB_ENV}"
+          fi
+
       - name: Bump version and push tag
+        if:  env.NIMFILECHANGED == 'true'
         run: ./.github/bin/release
 
       - name: Build binary
         run: ./.github/bin/build
 
       - name: Export current version
+        if:  env.NIMFILECHANGED == 'true'
         run: ./.github/bin/export-version
 
       - name: Publish release
+        if:  env.NIMFILECHANGED == 'true'
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
