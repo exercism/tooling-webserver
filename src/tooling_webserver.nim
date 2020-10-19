@@ -1,7 +1,8 @@
 import std/[json, os, osproc, posix, strformat, strutils]
 import pkg/[jester, uuids]
 
-const NimblePkgVersion {.strdefine.}: string = "unknown"
+const
+  NimblePkgVersion = staticExec("nimble dump --json ../").parseJson["version"].getStr()
 
 echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
 
