@@ -4,8 +4,6 @@ import pkg/[jester, uuids]
 const
   NimblePkgVersion = staticExec("nimble dump --json ../").parseJson["version"].getStr()
 
-echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
-
 router routes:
   post "/job":
     # Create unique ID for this job
@@ -45,6 +43,8 @@ router routes:
     resp response
 
 proc main() =
+  echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
+
   onSignal(SIGTERM):
     quit(0)
 
