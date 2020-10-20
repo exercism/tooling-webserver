@@ -12,5 +12,5 @@ backend       = "c"
 # Dependencies
 
 requires "nim >= 1.4.0"
-requires "jester"
+requires "jester >= 0.5.0"
 requires "uuids"
