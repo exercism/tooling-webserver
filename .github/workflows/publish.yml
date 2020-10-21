@@ -5,6 +5,7 @@ on:
       - master
     paths:
       - "**.nim"
+      - "**.nimble"
 
 jobs:
   build:
