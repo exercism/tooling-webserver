@@ -1,3 +1,7 @@
+**This tool has now been deprecated. Thank you to everyone who contributed and made it so useful while it was in use. :blue_heart:**
+
+---
+
 # Exercism Local Tooling Webserver
 
 This small webhook wrapper is used when tooling (analyzers/representers/test runners) runs inside the Docker development environment. Since they cannot be launched via `runc` in this environment we need an alternative. The [Tooling Invoker](https://github.com/exercism/tooling-invoker/) instead dispatches a web request. This tiny web server responds to those requests, wraps the underlying `./run.sh` test runner script, and returns the JSON output file as a simple JSON response.
