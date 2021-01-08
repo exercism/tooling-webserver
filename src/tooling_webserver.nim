@@ -1,9 +1,8 @@
 import std/[json, os, osproc, posix, strformat, strutils]
 import pkg/[jester, uuids]
 
-const NimblePkgVersion {.strdefine.}: string = "unknown"
-
-echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
+const
+  NimblePkgVersion = staticExec("nimble dump --json ../").parseJson["version"].getStr()
 
 router routes:
   post "/job":
@@ -44,6 +43,8 @@ router routes:
     resp response
 
 proc main() =
+  echo fmt"Exercism Local Tooling Webhook v{NimblePkgVersion}"
+
   onSignal(SIGTERM):
     quit(0)
 
